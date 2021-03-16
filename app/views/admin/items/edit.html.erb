@@ -1,0 +1,31 @@
+<h1>商品編集</h1>
+
+<%= form_with model:[:admin,@item], local:true do |f| %>
+  <div class="form-group has-icon">
+      <%= f.label :name, "商品名" %>
+      <%= f.text_field :name, class:"form-control" %>
+    </div>
+    <div class="form-group has-icon">
+      <%= f.label :introduction, "商品説明" %>
+      <%= f.text_area :introduction, class:"form-control" %>
+    </div>
+    <div class="form-group has-icon">
+      <%= f.label :image, "商品画像" %><br />
+      <%= f.attachment_field :image %>
+    </div>
+    <div class="form-group has-icon">
+      <%= f.label :genre_id, "ジャンル" %><br />
+      <%= f.select :genre_id, [["果物", "1"], ["お菓子", "2"]], include_blank: "選択して下さい" %>
+    </div>
+    <div class="form-group has-icon">
+      <%= f.label :price, "価格(税抜き)" %>
+      <%= f.text_field :price, class:"form-control" %>
+    </div>
+    <div class="form-group has-icon">
+      <%= f.radio_button :is_active, :on_sale, checked: "checked"%>
+       <%= f.label :is_active, "有", {value: :"0", style: "display: inline-block;"} %>
+       <%= f.radio_button :is_active, :off_sale %>
+       <%= f.label :is_active, "無", {value: :"1", style: "display: inline-block;"} %>
+    </div>
+    <%= f.submit "編集する", class:"btn btn-primary btn-block btn-base-1 mt-20" %>
+  <% end %>
