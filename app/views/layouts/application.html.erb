@@ -10,9 +10,13 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+      <%= link_to "Nagano Cake", root_path, class: "navbar-brand" %>
+
     <% if customer_signed_in? %>
       <li>
-        <%= link_to "マイページ", "#" %>
+        <%= link_to "マイページ", customer_path(current_customer) %>
       </li>
       <li>
         <%= link_to "カート内商品一覧", "#" %>
