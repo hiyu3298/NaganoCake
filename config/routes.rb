@@ -21,11 +21,19 @@ devise_for :customers, controllers: {
   end
 
   scope module: 'public' do
-    root 'homes#top'
+    root 'items#top'
     resources :orders, only: [:new, :index, :show]
     resources :items, only: [:index, :show]
     resources :customers, only: [:show, :edit, :update]
-    resources :cart_items, only: [:index, :update, :create]
+    resources :cart_items, only: [:index, :update, :create, :destroy] do
+      collection do
+        delete 'delete_all'
+      end
+    end
+    get 'orders/verification'
+    get 'orders/complete'
+    get '/customers', to: 'customers#show', as: 'customers'
+    get 'customers/delete_verification'
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
    end
 
