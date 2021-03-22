@@ -22,7 +22,7 @@ devise_for :customers, controllers: {
 
   scope module: 'public' do
     root 'items#top'
-    resources :orders, only: [:new, :index, :show]
+
     resources :items, only: [:index, :show]
     resources :customers, only: [:show, :edit, :update]
     resources :cart_items, only: [:index, :update, :create, :destroy] do
@@ -30,10 +30,11 @@ devise_for :customers, controllers: {
         delete 'delete_all'
       end
     end
-    get 'orders/verification'
-    get 'orders/complete'
+    get 'orders/check', to: 'orders#check'
+    get 'orders/thanks', to: 'orders#thanks'
     get '/customers', to: 'customers#show', as: 'customers'
-    get 'customers/delete_verification'
+    get 'customers/delete_check'
+    resources :orders, only: [:new, :index, :show, :create]
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
    end
 

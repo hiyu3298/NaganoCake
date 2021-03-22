@@ -16,6 +16,12 @@
         <div class="container">
         <%= link_to "Nagano Cake", root_path, class: "navbar-brand" %>
 
+    <% if current_customer %>
+      <div style="color:white">ようこそ
+        <%= current_customer.full_name %>さん
+      </div>
+    <% end %>
+
         <ul class="navbar-nav nav justify-content-end mr-sm-2">
           <% if customer_signed_in? %>
             <li class="nav-item">
