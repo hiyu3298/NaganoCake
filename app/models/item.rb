@@ -1,8 +1,9 @@
 class Item < ApplicationRecord
   has_many :cart_items
-  has_many :ordered_items
+  has_many :order_details
+  has_many :orders, through: :order_details
   attachment :image
-  belongs_to :genre
+  belongs_to :genre, optional: true
 
   enum is_active: { on_sale: 0, off_sale: 1 }
 
