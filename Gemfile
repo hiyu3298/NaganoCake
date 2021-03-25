@@ -67,3 +67,6 @@ gem "refile-mini_magick"
 gem 'bootstrap', '~> 4.5'
 gem 'jquery-rails'
 gem 'font-awesome-sass', '~> 5.13'
+gem 'enum_help' #enum
+gem 'pry-rails' #デバック
+gem 'rails-i18n'

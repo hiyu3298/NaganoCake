@@ -1,0 +1,47 @@
+<h1>受注詳細 </h1>
+
+<div>購入者 : <%= @order.customer.full_name %></div>
+
+<div>配送先 ：<%= @order.shipping_address %></div>
+
+<div>支払い方法 :
+<%= @order.payment_method %>
+</div>
+
+注文ステータス :
+<%= form_for @order, url: admin_order_path do |f| %>
+  <%= f.select :order_status, Order.statuses_i18n %>
+  <%= f.submit %>
+<% end %>
+
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>商品名</th>
+            <th>単価</th>
+            <th>数量</th>
+            <th>小計</th>
+            <th>制作ステータス</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @order_detail.each do |order_detail| %>
+            <tr>
+                <td><%= order_detail.item.name %></td>
+                <td><%= order_detail.item.price %></td>
+                <td><%= order_detail.amount %></td>
+                <td><%= order_detail.item.price * order_detail.amount %></td>
+                <%= form_for order_detail, url: admin_order_detail_path do |f| %>
+                  <td><%= f.select :production_status, OrderedItem.production_status %>
+                  <%= f.hidden_field :order_detail_id, :value => order_detail.id %>
+                  <%= f.submit 'へんこうする' %></td>
+                <% end %>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<div>商品合計 : <%= @total %></div>
+<div>送料 : <%= @order.shipping_cost %></div>
+<div>請求合計金額 : <%= @total + @order.shipping_cost %></div>

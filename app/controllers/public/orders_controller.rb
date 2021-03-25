@@ -39,7 +39,7 @@ class Public::OrdersController < ApplicationController
     elsif params[:address_select] == "1"
       session[:user][:shipping_postal_code] =  Address.find(params[:address_id]).postal_code
       session[:user][:shipping_address] = Address.find(params[:address_id]).address
-      session[:user][:delivery_name] = Address.find(params[:address_id]).shipping_name
+      session[:user][:delivery_name] = Address.find(params[:address_id]).name
     else
       session[:user][:shipping_postal_code] =  params[:postal_code]
       session[:user][:shipping_address] = params[:shipping_address]
@@ -52,7 +52,7 @@ class Public::OrdersController < ApplicationController
   def thanks
     order = Order.new(session[:user])
     order.shipping_cost = 500
-    order.shipping_amount = 1000
+    order.shipping_amount = cart_item.amount
     order.order_status = 1
     order.customer_id = current_customer.id
     order.save
@@ -79,7 +79,7 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:direction, :postal_code,:shipping_address,:payment_method)
+    params.require(:order).permit(:name, :postal_code,:shipping_address,:payment_method)
   end
 
   def cart_item_any?
