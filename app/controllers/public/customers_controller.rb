@@ -19,14 +19,20 @@ class Public::CustomersController < ApplicationController
   def delete_verification
   end
 
-  def destroy
-    user = Customer.find(params[:id])
-    user.destroy
-    redirect_to root_path
+  def withdraw
+    @customer = current_customer
+
+        # is_customer_statusカラムにフラグを立てる(default→false(有効状態)をtrue(無効状態)にする）
+        @customer.update(is_customer_status: true)
+        flash[:notice] = "退会しました。"
+        # ログアウトさせる
+        reset_session
+
+        redirect_to root_path
   end
 
 
   def customer_params
-    params.require(:customer).permit(:first_name, :last_name, :first_name_kana, :last_name_kana, :postal_code, :address, :telephone_number, :is_active, :email)
+    params.require(:customer).permit(:first_name, :last_name, :first_name_kana, :last_name_kana, :postal_code, :address, :telephone_number, :is_customer_status, :email)
   end
 end

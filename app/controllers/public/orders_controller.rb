@@ -43,7 +43,7 @@ class Public::OrdersController < ApplicationController
     else
       session[:user][:shipping_postal_code] =  params[:postal_code]
       session[:user][:shipping_address] = params[:shipping_address]
-      session[:user][:delivery_name] = params[:shipping_name]
+      session[:user][:delivery_name] = params[:delivery_name]
     end
     redirect_to orders_check_path
 
@@ -52,7 +52,7 @@ class Public::OrdersController < ApplicationController
   def thanks
     order = Order.new(session[:user])
     order.shipping_cost = 500
-    order.shipping_amount = cart_item.amount
+    order.shipping_amount = 1000
     order.order_status = 1
     order.customer_id = current_customer.id
     order.save
@@ -69,7 +69,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.all
+    @orders = current_customer.order_details
   end
 
   def show
@@ -79,7 +79,7 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:name, :postal_code,:shipping_address,:payment_method)
+    params.require(:order).permit(:delivery_name, :postal_code,:shipping_address,:payment_method)
   end
 
   def cart_item_any?

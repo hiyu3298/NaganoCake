@@ -1,14 +1,19 @@
 <h1>商品一覧</h1>
-<table class="table table-striped bg-light">
-<tr>
-  <th>商品名</th>
-  <th>商品単価</th>
-  <th>販売ステータス</th>
-</tr>
-<% @items.each do |item| %>
+
+<div class="container">
+  <table class="table table-striped bg-light">
   <tr>
-    <td><%= link_to item.name, admin_item_path(item) %></td>
-    <td><%= item.price %>
-    <td><%= item.is_active %></td>
+    <th>商品名</th>
+    <th>商品単価</th>
+    <th>販売ステータス</th>
   </tr>
-<% end %>
+  <% @items.each do |item| %>
+    <tr>
+      <td><%= link_to item.name, admin_item_path(item) %></td>
+      <td><%= item.price %>
+      <td><%= item.is_active %></td>
+    </tr>
+  <% end %>
+</div>
+
+<%= link_to "新規登録", new_admin_item_path, class:"btn btn-primary btn-block btn-base-1 mt-20" %>

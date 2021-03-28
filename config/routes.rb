@@ -22,6 +22,7 @@ devise_for :customers, controllers: {
 
   scope module: 'public' do
     root 'items#top'
+    patch 'customers/withdraw' => 'customers#withdraw', as: 'customers_withdraw'
     resources :items, only: [:index, :show]
     resources :cart_items, only: [:index, :update, :create, :destroy] do
       collection do

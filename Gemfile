@@ -70,3 +70,4 @@ gem 'font-awesome-sass', '~> 5.13'
 gem 'enum_help' #enum
 gem 'pry-rails' #デバック
 gem 'rails-i18n'
+gem 'discard', '~> 1.0'

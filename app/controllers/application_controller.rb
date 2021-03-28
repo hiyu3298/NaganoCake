@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     when Admin
         admin_root_path
     when Customer
-        root_path
+        customer_path(current_customer)
     end
   end
 
@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   #       new_customer_session_path
   #   end
   # end
-  
+
   # application_controllerでの記述でログアウト先がうまく遷移されないため
   # sessions_controllerに直接記述
 

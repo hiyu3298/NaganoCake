@@ -1,4 +1,4 @@
 <div class="mt-4">退会確認</div>
 
-<%= button_to '退会しない', customers_path, method: :get %>
-<%= button_to '退会する', customers_destroy_path(current_customer), method: :delete, confirm: "OK？" %>
+<%= button_to '退会しない', customers_path, method: :get, class: "glyphicon glyphicon-home btn btn-primary" %>
+<%= button_to '退会する', customers_withdraw_path, method: :patch, data: {confirm: "本当に退会してもよろしいですか？"}, class: "glyphicon glyphicon-tint btn btn-danger" %>
