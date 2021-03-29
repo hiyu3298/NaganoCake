@@ -1,6 +1,5 @@
 class Public::OrdersController < ApplicationController
   before_action :authenticate_customer!
-  before_action :cart_item_any?, only: [:new, :verification]
 
   def new
     @addresses = Address.all
@@ -59,6 +58,7 @@ class Public::OrdersController < ApplicationController
     cart_items = current_customer.cart_items
     cart_items.each do |cart_item|
       order_detail = OrderDetail.new
+      order_detail.order_id = order.id
       order_detail.item_id = cart_item.item.id
       order_detail.production_status = 0
       order_detail.non_taxed_price = cart_item.item.price
@@ -69,7 +69,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @orders = current_customer.order_details
+    @orders = current_customer.orders
   end
 
   def show
