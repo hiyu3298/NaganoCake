@@ -1,0 +1,36 @@
+<h3><strong>注文履歴詳細</strong></h3>
+
+<div calss="row">
+    <div class="col-xs-8">
+    	<strong>注文情報</strong>
+  	    <table class="table table-bordered table-condensed">
+          <tbody>
+              <tr>
+                <th class="info">注文日</th>
+          	    <td class="text-left">
+                  <%= @order.created_at.strftime('%Y/%m/%d %H:%M') %>
+                </td>
+              </tr>
+              <tr>
+                <th class="info">配送先</th>
+                <td class="text-left">
+                  <%= @order.shipping_postal_code %><br>
+                  <%= @order.shipping_address %><br>
+                  <%= @order.delivery_name %>
+                </td>
+              </tr>
+              <tr>
+                <th class="info">支払方法</th>
+                <td class="text-left">
+                  <%= @order.payment_method %>
+                </td>
+              </tr>
+              <tr>
+                <th class="info">ステータス</th>
+                <td class="text-left">
+                  <%= @order.order_status %>
+                </td>
+              </tr>
+          </tbody>
+        </table>
+    </div>
