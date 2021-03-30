@@ -13,17 +13,21 @@
 
         <tr>
           <th>配送先</th>
-          <td><%= @order.address %></td>
+          <td><%= @order.shipping_address %></td>
         </tr>
 
         <tr>
           <th>支払方法</th>
-          <td></td>
+          <td><%= @order.payment_method %></td>
         </tr>
 
         <tr>
           <th>注文ステータス</th>
           <td>
+          <%= form_for (@order), url:admins_order_path(@order) do |f| %>
+          <%= f.select :order_status,Order.order_statuses.keys.to_a %>
+          <%= f.submit "更新", class: "btn btn-success" %>
+          <% end %>
           </td>
         </tr>
 
